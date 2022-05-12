@@ -1,0 +1,38 @@
+{
+  "name": "@strategies/speckle",
+  "repository": "https://github.com/sasakiassociates/speckle",
+  "version": "0.0.0",
+  "description": "Speckle API client",
+  "author": "Eric Youngberg <eyoungberg@sasaki.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "scripts": {
+    "type:watch": "tsc --watch --emitDeclarationOnly",
+    "type": "tsc --emitDeclarationOnly",
+    "build": "npm run type && npx rollup -c",
+    "start": "npm run type:watch | npx rollup -c -w"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "rollup": "^2.59.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@speckle/objectloader": "^2.5.4"
+  }
+}
