@@ -258,10 +258,10 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@speckle/objectloader@^2.5.4":
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/@speckle/objectloader/-/objectloader-2.5.4.tgz#e6df26e302bc67547471fa32f41356fe4389d765"
-  integrity sha512-swYL0gPnQAtJYJCjIJD2nbB7PUR4sxX42YOEEIueyVjPq/dhi4/Ie5HJE1bckyW2goLTDXDLyB57b+toV39EhQ==
+"@speckle/objectloader@2.5.5":
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/@speckle/objectloader/-/objectloader-2.5.5.tgz#79bfbe6963cd29fca5ceaeb262a20502e334171b"
+  integrity sha512-6BM/ptI6y/kfY2wOBy1U0zz5krvcN6h0ccYQmebGk6RKUHuBGnXehptML12MrV4QHBbDTZMM5/cdsg8n4ag6iA==
   dependencies:
     "@babel/core" "^7.17.9"
     core-js "^3.21.1"
