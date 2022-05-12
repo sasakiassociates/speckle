@@ -24,12 +24,13 @@ export default class SpeckleApp {
 
     public get streams(): Promise<object> {
         return API.query(this.server, this.token, `query {
-            totalCount
-            cursor
-            items {
-                id
-                name
-                updatedAt
+            streams {
+                totalCount
+                items {
+                    id
+                    name
+                    updatedAt
+                }
             }
         }`);
     }

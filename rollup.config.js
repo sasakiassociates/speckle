@@ -23,7 +23,7 @@ export default {
     ],
 
     plugins: [
-        nodeResolve({ preferBuiltins: true }),
+        nodeResolve(),
         commonjs(),
         typescript(),
     ]

@@ -6,14 +6,11 @@ import API from './api';
 import SpeckleNode from './Node';
 import SpeckleObject from './Object';
 import SpeckleApp from './Speckle';
+import SpeckleCommit from './Commit';
 import { SpeckleBaseObject } from './types';
 
 
 export default class Stream extends SpeckleNode<SpeckleApp> {
-
-    public cursor?: string;
-    public items?: { id: string, name: string, updateAt: string }[];
-    public totalCount?: number;
 
     public get app(): SpeckleApp {
         return this.parent;
@@ -21,6 +18,10 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
 
     public Object(id: string): SpeckleObject {
         return new SpeckleObject(id, this);
+    }
+    
+    public Commit(id: string): SpeckleCommit {
+        return new SpeckleCommit(id, this);
     }
 
     public async commit(obj: SpeckleObject, message: string = "data from @strategies/speckle", branchName: string = 'main') {
@@ -54,22 +55,75 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
         return newObject;
     }
 
+    public get branches(): Promise<object> {
+        return API.query(
+            this.app.server, 
+            this.app.token, 
+            `query Stream($id: String!) {
+                stream(id: $id) {
+                    branches {
+                        totalCount
+                        items {
+                            id
+                            name
+                            description
+                            commits(limit: 4) {
+                                totalCount
+                                items {
+                                    id
+                                    authorId
+                                    authorName
+                                    authorAvatar
+                                    createdAt
+                                    message
+                                    referencedObject
+                                    branchName
+                                    sourceApplication
+                                }
+                            }
+                        }
+                    }
+                 }
+            }`, 
+            { id: this.id }
+        );
+    }
+
+    public get collaborators(): Promise<object> {
+        return API.query(
+            this.app.server, 
+            this.app.token, 
+            `query Stream($id: String!) {
+                stream(id: $id) {
+                    collaborators {
+                        id
+                        name
+                        role
+                        company
+                        avatar
+                    }
+                }
+            }`, 
+            { id: this.id }
+        );
+    }
+
     protected async fetch() {
         return API.query(
             this.app.server, 
             this.app.token, 
-            `query { 
-              streams(query: $streamId) {
-                totalCount
-                cursor
-                items {
-                  id
-                  name
-                  updatedAt
+            `query Stream($id: String!) {
+                stream(id: $id) {
+                    id
+                    name
+                    description
+                    isPublic
+                    createdAt
+                    updatedAt
+                    role
                 }
-              }
             }`, 
-            { streamId: this.id }
+            { id: this.id }
         );
     }
 
