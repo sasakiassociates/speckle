@@ -3,11 +3,12 @@
  */
 
 import SpeckleApp from './Speckle';
+import SpeckleCommit from './Commit';
 import SpeckleStream from './Stream';
 import SpeckleObject from './Object';
 
 
-type Nodes = SpeckleApp | SpeckleStream | SpeckleObject;
+type Nodes = SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;
 
 export default abstract class SpeckleNode<T extends Nodes> {
 

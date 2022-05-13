@@ -11,7 +11,7 @@ import API from './api';
 export default class SpeckleApp {
 
     public readonly server: string;
-    public readonly token: string;
+    public readonly token?: string;
 
     constructor(args: SpeckleConfig) {
         this.server = args.server || 'https://speckle.xyz';

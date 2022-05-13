@@ -4,7 +4,7 @@
 
 export type SpeckleConfig = {
     server?: string;
-    token: string; 
+    token?: string; 
 }
 
 export type SpeckleBaseObject = {

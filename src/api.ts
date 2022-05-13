@@ -5,15 +5,20 @@
 
 export default class API  {
 
-    static async query(server: string, token: string, query: string, variables: object = {}) {
+    static async query(server: string, token: string|undefined, query: string, variables: object = {}) {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        if (token) {
+            headers['Authorization'] = 'Bearer ' + token;
+        }
+
         const res = await fetch(
             `${server}/graphql`,
             {
                 method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json'
-                },
+                headers,
                 body: JSON.stringify({ 
                     query,
                     variables
