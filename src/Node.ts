@@ -39,7 +39,7 @@ export default abstract class SpeckleNode<T extends Nodes> {
         return this._hasBeenFetched;
     }
 
-    public async reload(): Promise<object> {
+    public async refresh(): Promise<object> {
         this._hasBeenFetched = false;
         return this.data;
     }
