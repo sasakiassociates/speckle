@@ -7,28 +7,32 @@ import SpeckleNode from './Node';
 import SpeckleStream from './Stream';
 
 
-export default class SpeckleCommit extends SpeckleNode<SpeckleStream> {
+export type CommitData = {
+    id: string;
+    message: string;
+    referencedObject: string;
+    authorId: string;
+    createdAt: string;
+    branchName: string;
+    sourceApplication: string;
+};
+
+export default class SpeckleCommit extends SpeckleNode<SpeckleStream, CommitData> {
 
     public get stream(): SpeckleStream {
         return this.parent;
     }
 
-    protected async fetch(): Promise<object> {
-        return API.query(
+    protected async fetch() {
+        const res =  await API.query(
             this.stream.app.server, 
             this.stream.app.token, 
             `query StreamCommitQuery($streamId: String!, $id: String!) {
                 stream(id: $streamId) {
-                    id
-                    name
-                    role
                     commit(id: $id) {
-                        id
                         message
                         referencedObject
-                        authorName
                         authorId
-                        authorAvatar
                         createdAt
                         branchName
                         sourceApplication
@@ -41,6 +45,7 @@ export default class SpeckleCommit extends SpeckleNode<SpeckleStream> {
             }
         );
 
+        return { ...res.data.stream.commit, id: this.id };
     }
 
     

@@ -10,21 +10,21 @@ import SpeckleObject from './Object';
 
 type Nodes = SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;
 
-export default abstract class SpeckleNode<T extends Nodes> {
+export default abstract class SpeckleNode<Parent extends Nodes, ReturnType extends object = object> {
 
     public readonly id: string;
-    public readonly parent: T;
-    protected payload: object = {};
+    public readonly parent: Parent;
+    protected payload: ReturnType = {} as ReturnType;
     private _hasBeenFetched: boolean = false;
 
-    constructor(id: string, parent: T) {
+    constructor(id: string, parent: Parent) {
         this.id = id;
         this.parent = parent;
     }
 
-    protected abstract fetch(): Promise<object>;
+    protected abstract fetch(): Promise<ReturnType>;
 
-    public get data(): Promise<object> {
+    public get get(): Promise<ReturnType> {
         return (async () => {
             if (!this.hasBeenFetched) {
                 this.payload = await this.fetch();
@@ -39,9 +39,9 @@ export default abstract class SpeckleNode<T extends Nodes> {
         return this._hasBeenFetched;
     }
 
-    public async refresh(): Promise<object> {
+    public async refresh(): Promise<ReturnType> {
         this._hasBeenFetched = false;
-        return this.data;
+        return this.payload;
     }
 
 }
