@@ -26,7 +26,12 @@ export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
     }
 
     protected async fetch() {
-        const res =  await API.query(
+        if (this.app.token === null) {
+            console.log("Token is necessary for fetching User Data")
+            return
+        }
+
+        const res = await API.query(
             this.app.server,
             this.app.token,
             `query User($id: String!) {
@@ -48,9 +53,7 @@ export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
             }
         );
 
-        console.log(res);
-        // return new UserData;
-        return { ...res.data.stream.commit, id: this.id };
+        return { ...res.data, id: this.id };
 
     }
 

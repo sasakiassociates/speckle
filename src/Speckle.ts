@@ -4,7 +4,7 @@
 
 import { SpeckleConfig } from './types';
 import SpeckleStream from './Stream';
-
+import SpeckleUser, { UserData } from "./User";
 import API from './api';
 
 
@@ -16,6 +16,10 @@ export default class SpeckleApp {
     constructor(args: SpeckleConfig) {
         this.server = args.server || 'https://speckle.xyz';
         this.token = args.token;
+    }
+
+    public async User(id: string): Promise<UserData> {
+        return await new SpeckleUser(id, this).get;
     }
 
     public Stream(id: string): SpeckleStream {
