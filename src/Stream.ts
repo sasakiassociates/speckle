@@ -46,6 +46,7 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
     public async writeAndCommitObject(obj: SpeckleBaseObject, message?: string, branchName?: string): Promise<SpeckleObject> {
         const newObject = this.Object(obj.id);
 
+
         await this.commit(
             await newObject.write(obj), 
             message, 

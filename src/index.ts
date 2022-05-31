@@ -8,7 +8,7 @@ import SpeckleObject from './Object';
 import SpeckleCommit, {CommitData} from './Commit';
 import SpeckleUser, {UserData} from './User';
 
-import {SpeckleConfig, SpeckleBaseObject} from './types';
+import { SpeckleConfig, SpeckleBaseObject, SpeckleAppConfig } from './types';
 
 export {
 
@@ -23,5 +23,6 @@ export {
     UserData,
     SpeckleConfig,
     SpeckleBaseObject,
+    SpeckleAppConfig
 
 };
