@@ -8,20 +8,24 @@ import API from './api';
 import SpeckleNode from './Node';
 import SpeckleStream from './Stream';
 import { SpeckleBaseObject } from './types';
+import md5 from "md5";
 
 
 export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
 
     protected readonly loader: any;
 
-    constructor(id: string, stream: SpeckleStream) {
+    constructor(id: string | undefined, stream: SpeckleStream) {
+        if (id === undefined)
+            id = md5((new Date()).toString());
+
         super(id, stream);
 
         this.loader = new ObjectLoader({
             serverUrl: stream.app.server,
             token: stream.app.token,
             streamId: stream.id,
-            objectId: id, 
+            objectId: id,
         });
     }
 
@@ -31,8 +35,8 @@ export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
 
     public async write(obj: SpeckleBaseObject): Promise<SpeckleObject> {
         await API.query(
-            this.stream.app.server, 
-            this.stream.app.token, 
+            this.stream.app.server,
+            this.stream.app.token,
             `mutation objectCreate ($object: ObjectCreateInput!) {
                 objectCreate(objectInput: $object)
             }`,
@@ -58,5 +62,5 @@ export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
         return this.loader.getAndConstructObject();
     }
 
-    
+
 }
