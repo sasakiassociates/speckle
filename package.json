@@ -1,7 +1,7 @@
 {
   "name": "@strategies/speckle",
   "repository": "https://github.com/sasakiassociates/speckle",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Speckle API client",
   "author": "Eric Youngberg <eyoungberg@sasaki.com>",
   "license": "MIT",
