@@ -1,4 +1,4 @@
-name: Pacakge
+name: Package
 on:
   push:
     branches:
@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Create NPM Pacakge
+      - name: Create NPM Package
         run: |
           git branch -d npm &> /dev/null || echo upm branch not found
           git checkout -b npm
