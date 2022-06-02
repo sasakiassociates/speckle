@@ -16,4 +16,5 @@ export type SpeckleAppConfig = {
 export type SpeckleBaseObject = {
     id: string;
     speckle_type: string;
+    data: object;
 };
