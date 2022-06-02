@@ -6,7 +6,7 @@ import { SpeckleConfig } from './types';
 import SpeckleStream from './Stream';
 import SpeckleUser, { UserData } from "./User";
 import API from './api';
-
+import md5 from "md5";
 
 export default class SpeckleApp {
 
@@ -16,6 +16,10 @@ export default class SpeckleApp {
     constructor(args: SpeckleConfig) {
         this.server = args.server || 'https://speckle.xyz';
         this.token = args.token;
+    }
+
+    public get getId(): string {
+        return md5((new Date()).toString());
     }
 
     public async User(id: string): Promise<UserData> {
@@ -38,5 +42,5 @@ export default class SpeckleApp {
             }
         }`);
     }
-    
+
 };
