@@ -12,6 +12,7 @@ import API from './api';
 
 import { SpeckleConfig, SpeckleBaseObject, SpeckleAppConfig } from './types';
 
+
 export {
 
     Speckle,

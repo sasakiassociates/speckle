@@ -8,7 +8,7 @@ import SpeckleStream from './Stream';
 import SpeckleObject from './Object';
 
 
-type Nodes = SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;
+type Nodes = SpeckleNode<Nodes> | SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;
 
 export default abstract class SpeckleNode<Parent extends Nodes, ReturnType extends object = object> {
 
