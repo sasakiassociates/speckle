@@ -33,6 +33,7 @@ export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
         return this.parent;
     }
 
+
     public async write(obj: SpeckleBaseObject): Promise<SpeckleObject> {
         await API.query(
             this.stream.app.server,

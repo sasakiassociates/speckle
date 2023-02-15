@@ -5,8 +5,10 @@
 import Speckle from './Speckle';
 import SpeckleStream from './Stream';
 import SpeckleObject from './Object';
-import SpeckleCommit, {CommitData} from './Commit';
-import SpeckleUser, {UserData} from './User';
+import SpeckleCommit, { CommitData } from './Commit';
+import SpeckleUser, { UserData } from './User';
+import SpeckleNode from "./Node";
+import API from './api';
 
 import { SpeckleConfig, SpeckleBaseObject, SpeckleAppConfig } from './types';
 
@@ -17,6 +19,8 @@ export {
     SpeckleStream,
     SpeckleObject,
     SpeckleUser,
+    SpeckleNode,
+    API,
 
     // Types
     CommitData,

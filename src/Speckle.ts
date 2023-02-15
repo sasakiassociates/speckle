@@ -10,12 +10,14 @@ import md5 from "md5";
 
 export default class SpeckleApp {
 
-    public readonly server: string;
+    public readonly server: string = 'https://speckle.xyz';
     public readonly token?: string;
 
-    constructor(args: SpeckleConfig) {
-        this.server = args.server || 'https://speckle.xyz';
-        this.token = args.token;
+    constructor(args?: SpeckleConfig) {
+        if (args) {
+            this.server = args.server;
+            this.token = args.token;
+        }
     }
 
     public get getId(): string {
