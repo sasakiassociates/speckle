@@ -38,10 +38,10 @@ The client uses a node ref pattern where you create reference objects that map o
 
 Once you need data from a reference, you can resolve it:
 ```ts
-let streamData = await stream.data;
+let streamData = await stream.get;
 ```
 
-This will return data about the stream you have referenced. Once resolved, it will remain cached so that `await stream.data` will resolve immediately the next times it is called. If you need to refresh the cached data:
+This will return data about the stream you have referenced. Once resolved, it will remain cached so that `await stream.get` will resolve immediately the next times it is called. If you need to refresh the cached data:
 ```ts
 streamData = await stream.refresh();
 ```
@@ -96,14 +96,14 @@ The goal of this client was to not just create methods that map directly onto th
 To instantiate this hierarchy in your app, you have two ways of doing so:  
 ### Chaining
 ```ts
-const objData = await (new Speckle()).Stream('aafeasf').Object('dgeadse').data;
+const objData = await (new Speckle()).Stream('aafeasf').Object('dgeadse').get;
 ```
 
 ### Composing
 ```ts
 const { SpeckleStream, SpeckleObject } from '@strategies/speckle';
 
-const objData = await (new SpeckleObject('dgeadse', new SpeckleStream('aafeasf', new Speckle()))).data;
+const objData = await (new SpeckleObject('dgeadse', new SpeckleStream('aafeasf', new Speckle()))).get;
 ```
 
 ## Collaborating
