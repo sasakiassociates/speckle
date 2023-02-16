@@ -15,7 +15,7 @@ export default class SpeckleApp {
 
     constructor(args?: SpeckleConfig) {
         if (args) {
-            this.server = args.server;
+            this.server = args.server || this.server;
             this.token = args.token;
         }
     }

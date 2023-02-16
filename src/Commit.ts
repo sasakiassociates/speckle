@@ -19,6 +19,10 @@ export type CommitData = {
 
 export default class SpeckleCommit extends SpeckleNode<SpeckleStream, CommitData> {
 
+    public get url(): string {
+        return `${this.stream.url}/commits/${this.id}`;
+    }
+
     public get stream(): SpeckleStream {
         return this.parent;
     }

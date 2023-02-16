@@ -12,6 +12,10 @@ import { SpeckleBaseObject } from './types';
 
 export default class Stream extends SpeckleNode<SpeckleApp> {
 
+    public get url(): string {
+        return `${this.app.server}/streams/${this.id}`;
+    }
+
     public get app(): SpeckleApp {
         return this.parent;
     }
@@ -45,7 +49,6 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
 
     public async writeAndCommitObject(obj: SpeckleBaseObject, message?: string, branchName?: string): Promise<SpeckleObject> {
         const newObject = this.Object(obj.id);
-
 
         await this.commit(
             await newObject.write(obj), 

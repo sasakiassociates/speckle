@@ -90,6 +90,14 @@ And we could do it all at once:
 await stream.writeAndCommitObject(speckleObj, "We're doing it!", "main");
 ```
 
+### URL
+
+Every SpeckleNode has a `.url` getter which will provide the URL for that node in the API:
+```ts
+(new Speckle()).Stream('abcdefg').Object('hijklmn').url                                     // https://speckle.xyz/streams/abcdefg/objects/hijklmn
+(new Speckle({ server: 'https://speckle.me.com' })).Stream('opqrstu').Commit('vwxyzab').url // https://speckle.me.com/streams/opqrstu/commits/vwxyzab
+```
+
 ## Chainable and/or Composable
 The goal of this client was to not just create methods that map directly onto the API endpoints, as many clients do, but to provide reference objects that can be easily passed around in your application. This allows you to write data more generically without having to worry about passing in all of the variables necessary to compose a nice long query each time. How this is organized is through the hierarchy of the API (e.g. an object node requires a stream node).  
 

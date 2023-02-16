@@ -21,6 +21,10 @@ export type UserData = {
 
 export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
 
+    public get url(): string {
+        return this.app.server;
+    }
+
     public get app(): SpeckleApp {
         return this.parent;
     }

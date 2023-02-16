@@ -22,6 +22,8 @@ export default abstract class SpeckleNode<Parent extends Nodes, ReturnType exten
         this.parent = parent;
     }
 
+    public abstract get url(): string;
+
     protected abstract fetch(): Promise<ReturnType>;
 
     public get get(): Promise<ReturnType> {

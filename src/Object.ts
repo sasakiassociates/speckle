@@ -29,6 +29,10 @@ export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
         });
     }
 
+    public get url(): string  {
+        return `${this.stream.url}/objects/${this.id}`;
+    }
+
     public get stream(): SpeckleStream {
         return this.parent;
     }
