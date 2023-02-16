@@ -23,11 +23,12 @@ export {
     SpeckleNode,
     API,
 
-    // Types
+};
+
+export type {
     CommitData,
     UserData,
     SpeckleConfig,
     SpeckleBaseObject,
     SpeckleAppConfig
-
 };

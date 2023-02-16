@@ -1,6 +1,6 @@
 # @strategies/speckle
 
-A JavaScript client for Speckle's API. The client was designed with a node ref pattern, allowing you to build references to data nodes in the API and only resolve them when they are needed.
+A TypeScript client for Speckle's API. The client was designed with a node ref pattern, allowing you to build references to data nodes in the API and only resolve them when they are needed.
 
 
 ## Install
