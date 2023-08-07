@@ -1,38 +1,38 @@
 /**
- * Commit
+ * Model (branch)
  */
+
 
 import API from './api';
 import SpeckleNode from './Node';
-import SpeckleStream from './Stream';
+import Project from './Project';
 
 
-export type CommitData = {
+export type ModelData = {
     id: string;
-    message: string;
-    referencedObject: string;
-    authorId: string;
+    name: string;
+    author: {};
+    versions: [];
     createdAt: string;
-    branchName: string;
-    sourceApplication: string;
+    activity : [];
 };
 
-export default class SpeckleCommit extends SpeckleNode<SpeckleStream, CommitData> {
+export default class Model extends SpeckleNode<Project, ModelData> {
 
     public get url(): string {
-        return `${this.stream.url}/commits/${this.id}`;
+        return `${this.project.url}/branches/${this.id}`;
     }
 
-    public get stream(): SpeckleStream {
+    public get project(): Project {
         return this.parent;
     }
 
     protected async fetch() {
         const res =  await API.query(
-            this.stream.app.server, 
-            this.stream.app.token, 
-            `query StreamCommitQuery($streamId: String!, $id: String!) {
-                stream(id: $streamId) {
+            this.project.app.server, 
+            this.project.app.token, 
+            `query projectCommitQuery($projectId: String!, $id: String!) {
+                stream(id: $projectId) {
                     commit(id: $id) {
                         message
                         referencedObject
@@ -45,10 +45,11 @@ export default class SpeckleCommit extends SpeckleNode<SpeckleStream, CommitData
             }`, 
             { 
                 id: this.id,
-                streamId: this.stream.id,
+                projectId: this.project.id,
             }
         );
 
+        // does this need to be mapped to the previous version?
         return { ...res.data.stream.commit, id: this.id };
     }
 

@@ -3,9 +3,9 @@
  */
 
 import SpeckleApp from './Speckle';
-import SpeckleCommit from './Commit';
-import SpeckleStream from './Stream';
-import SpeckleObject from './Object';
+import SpeckleCommit from './Version';
+import SpeckleStream from './Project';
+import SpeckleObject from './ObjectReference';
 
 
 type Nodes = SpeckleNode<Nodes> | SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;

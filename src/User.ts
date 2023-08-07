@@ -17,9 +17,11 @@ export type UserData = {
     profiles: string;
     role: string;
     suuid: string;
+    
 };
 
-export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
+export default class User extends SpeckleNode<SpeckleApp, UserData> {
+
 
     public get url(): string {
         return this.app.server;
@@ -53,7 +55,7 @@ export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
                 }
             }`,
             {
-                id: this.id,
+                id: this.id
             }
         );
 
