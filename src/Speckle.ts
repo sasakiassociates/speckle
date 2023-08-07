@@ -32,6 +32,32 @@ export default class SpeckleApp {
         return new SpeckleStream(id, this);
     }
 
+    public get activeUser(): Promise<UserData>{
+        return API.query(this.server, this.token, `query{
+            activeUser {
+                name
+                avatar
+                bio
+                company
+                email
+                id
+                role
+                verified
+                streams{
+                    cursor
+                    totalCount
+                    items{
+                        id
+                        name
+                        isPublic
+                        size
+                    }
+                }
+
+            }
+        }`)
+    }
+
     public get streams(): Promise<object> {
         return API.query(this.server, this.token, `query {
             streams {
