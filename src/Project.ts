@@ -3,20 +3,20 @@
  */
 
 import API from './api';
-import SpeckleNode from './Node';
+import Node from './Node';
 import ObjectRef from './ObjectReference';
-import SpeckleApp from './Speckle';
+import Speckle from './Speckle';
 import Version from './Version';
 import { SpeckleBaseObject } from './types';
 
 
-export default class extends SpeckleNode<SpeckleApp> {
+export default class extends Node<Speckle> {
 
     public get url(): string {
         return `${this.app.server}/streams/${this.id}`;
     }
 
-    public get app(): SpeckleApp {
+    public get app(): Speckle {
         return this.parent;
     }
 

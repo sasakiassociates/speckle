@@ -3,7 +3,7 @@
  */
 
 import API from './api';
-import SpeckleNode from './Node';
+import Node from './Node';
 import Project from './Project';
 
 
@@ -17,7 +17,7 @@ export type VersionData = {
     sourceApplication: string;
 };
 
-export default class Version extends SpeckleNode<Project, VersionData> {
+export default class Version extends Node<Project, VersionData> {
 
     public get url(): string {
         return `${this.project.url}/commits/${this.id}`;
