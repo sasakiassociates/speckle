@@ -2,13 +2,13 @@
  * API Node
  */
 
-import SpeckleApp from './Speckle';
-import SpeckleCommit from './Version';
-import SpeckleStream from './Project';
-import SpeckleObject from './ObjectReference';
+import Speckle from './Speckle';
+import Version from './Version';
+import Project from './Project';
+import ObjectRef from './ObjectReference';
 
 
-type Nodes = SpeckleNode<Nodes> | SpeckleApp | SpeckleStream | SpeckleObject | SpeckleCommit;
+type Nodes = SpeckleNode<Nodes> | Speckle | Project | ObjectRef | Version;
 
 export default abstract class SpeckleNode<Parent extends Nodes, ReturnType extends object = object> {
 
