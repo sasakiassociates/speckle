@@ -31,20 +31,36 @@ export default class Model extends SpeckleNode<Project, ModelData> {
         const res =  await API.query(
             this.project.app.server, 
             this.project.app.token, 
-            `query projectCommitQuery($projectId: String!, $id: String!) {
+            `query projectCommitQuery($projectId: String!, $name: String!) {
                 stream(id: $projectId) {
-                    commit(id: $id) {
-                        message
-                        referencedObject
-                        authorId
-                        createdAt
-                        branchName
-                        sourceApplication
+                    branch(name: $name) {
+                      createdAt
+                      description
+                      name
+                      author {
+                        email
+                        name
+                        role
+                        avatar
+                      }
+                      commits {
+                        cursor
+                        items {
+                          id
+                          authorAvatar
+                          authorName
+                          createdAt
+                          message
+                          referencedObject
+                          totalChildrenCount
+                        }
+                        }
+                      }
                     }
-                }
+                  }
             }`, 
             { 
-                id: this.id,
+                name: this.id,
                 projectId: this.project.id,
             }
         );
