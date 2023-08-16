@@ -1,21 +1,21 @@
 /**
- * SpeckleObject
+ * Object Reference
  */
 
 import ObjectLoader from '@speckle/objectloader';
 
 import API from './api';
-import SpeckleNode from './Node';
-import SpeckleStream from './Stream';
+import Node from './Node';
+import Project from './Project';
 import { SpeckleBaseObject } from './types';
 import md5 from "md5";
 
 
-export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
+export default class ObjectReference extends Node<Project> {
 
     protected readonly loader: any;
 
-    constructor(id: string | undefined, stream: SpeckleStream) {
+    constructor(id: string | undefined, stream: Project) {
         if (id === undefined)
             id = md5((new Date()).toString());
 
@@ -30,24 +30,24 @@ export default class SpeckleObject extends SpeckleNode<SpeckleStream> {
     }
 
     public get url(): string  {
-        return `${this.stream.url}/objects/${this.id}`;
+        return `${this.project.url}/objects/${this.id}`;
     }
 
-    public get stream(): SpeckleStream {
+    public get project(): Project {
         return this.parent;
     }
 
 
-    public async write(obj: SpeckleBaseObject): Promise<SpeckleObject> {
+    public async write(obj: SpeckleBaseObject): Promise<ObjectReference> {
         await API.query(
-            this.stream.app.server,
-            this.stream.app.token,
+            this.project.app.server,
+            this.project.app.token,
             `mutation objectCreate ($object: ObjectCreateInput!) {
                 objectCreate(objectInput: $object)
             }`,
             {
                 object: {
-                    streamId: this.stream.id,
+                    streamId: this.project.id,
                     objects: [obj],
                 },
             }

@@ -1,34 +1,34 @@
 /**
- * Stream
+ * Project (stream)
  */
 
 import API from './api';
-import SpeckleNode from './Node';
-import SpeckleObject from './Object';
-import SpeckleApp from './Speckle';
-import SpeckleCommit from './Commit';
+import Node from './Node';
+import ObjectRef from './ObjectReference';
+import Speckle from './Speckle';
+import Version from './Version';
 import { SpeckleBaseObject } from './types';
 
 
-export default class Stream extends SpeckleNode<SpeckleApp> {
+export default class extends Node<Speckle> {
 
     public get url(): string {
         return `${this.app.server}/streams/${this.id}`;
     }
 
-    public get app(): SpeckleApp {
+    public get app(): Speckle {
         return this.parent;
     }
 
-    public Object(id: string): SpeckleObject {
-        return new SpeckleObject(id, this);
+    public Object(id: string): ObjectRef {
+        return new ObjectRef(id, this);
     }
     
-    public Commit(id: string): SpeckleCommit {
-        return new SpeckleCommit(id, this);
+    public Version(id: string): Version {
+        return new Version(id, this);
     }
 
-    public async commit(obj: SpeckleObject, message: string = "data from @strategies/speckle", branchName: string = 'main') {
+    public async commit(obj: ObjectRef, message: string = "data from @strategies/speckle", branchName: string = 'main') {
         return API.query(
             this.parent.server, 
             this.parent.token, 
@@ -47,7 +47,7 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
         );
     }
 
-    public async writeAndCommitObject(obj: SpeckleBaseObject, message?: string, branchName?: string): Promise<SpeckleObject> {
+    public async writeAndCommitObject(obj: SpeckleBaseObject, message?: string, branchName?: string): Promise<ObjectRef> {
         const newObject = this.Object(obj.id);
 
         await this.commit(
@@ -59,7 +59,7 @@ export default class Stream extends SpeckleNode<SpeckleApp> {
         return newObject;
     }
 
-    public get branches(): Promise<object> {
+    public get models(): Promise<object> {
         return API.query(
             this.app.server, 
             this.app.token, 

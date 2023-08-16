@@ -3,11 +3,12 @@
  */
 
 import Speckle from './Speckle';
-import SpeckleStream from './Stream';
-import SpeckleObject from './Object';
-import SpeckleCommit, { CommitData } from './Commit';
-import SpeckleUser, { UserData } from './User';
-import SpeckleNode from "./Node";
+import Project from './Project';
+import ObjectRef from './ObjectReference';
+import Model from './Model';
+import Version, { VersionData } from './Version';
+import User, { UserData } from './User';
+import Node from "./Node";
 import API from './api';
 
 import { SpeckleConfig, SpeckleBaseObject, SpeckleAppConfig } from './types';
@@ -16,17 +17,18 @@ import { SpeckleConfig, SpeckleBaseObject, SpeckleAppConfig } from './types';
 export {
 
     Speckle,
-    SpeckleCommit,
-    SpeckleStream,
-    SpeckleObject,
-    SpeckleUser,
-    SpeckleNode,
+    Version,
+    Model,
+    Project,
+    User,
+    ObjectRef as ObjectReference,
+    Node as Node,
     API,
 
 };
 
 export type {
-    CommitData,
+    VersionData as VersionData,
     UserData,
     SpeckleConfig,
     SpeckleBaseObject,

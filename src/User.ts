@@ -3,8 +3,8 @@
  */
 
 import API from './api';
-import SpeckleNode from './Node';
-import SpeckleApp from "./Speckle";
+import Node from './Node';
+import Speckle from "./Speckle";
 
 export type UserData = {
     id: string;
@@ -17,15 +17,17 @@ export type UserData = {
     profiles: string;
     role: string;
     suuid: string;
+    
 };
 
-export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
+export default class User extends Node<Speckle, UserData> {
+
 
     public get url(): string {
         return this.app.server;
     }
 
-    public get app(): SpeckleApp {
+    public get app(): Speckle {
         return this.parent;
     }
 
@@ -53,7 +55,7 @@ export default class SpeckleUser extends SpeckleNode<SpeckleApp, UserData> {
                 }
             }`,
             {
-                id: this.id,
+                id: this.id
             }
         );
 
