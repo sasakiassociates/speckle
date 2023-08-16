@@ -32,6 +32,11 @@ export default class SpeckleApp {
         return new Project(id, this);
     }
 
+    public async authenticate(callback) {
+        const data = await this.activeUser;
+        callback(data);
+    }
+
     public get activeUser(): Promise<UserData>{
         return API.query(this.server, this.token, `query{
             activeUser {
