@@ -32,7 +32,7 @@ export default class SpeckleApp {
         return new Project(id, this);
     }
 
-    public async authenticate(callback) {
+    public async authenticate(callback: (user: any) => any) {
         const data = await this.activeUser;
         callback(data);
     }

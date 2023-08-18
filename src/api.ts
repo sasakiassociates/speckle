@@ -3,10 +3,15 @@
  * @Private
  */
 
+type Headers = {
+    'Content-Type': string; 
+    'Authorization'?: string;
+};
+
 export default class API  {
 
     static async query(server: string, token: string|undefined, query: string, variables: object = {}) {
-        const headers = {
+        const headers: Headers = {
             'Content-Type': 'application/json'
         };
 
